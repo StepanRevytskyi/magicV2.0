@@ -15,7 +15,7 @@ class CryptocurrencyPresenter : MvpPresenter<CryptoView>(), Callback {
 
     private var isLoading: Boolean = false
     private var start: Int = 1
-    private var limit: Int = 10
+    private var limit: Int = 25
     private var liveData: MutableLiveData<ArrayList<Data>> = MutableLiveData()
     private val repository: CryptocurrencyRepository = CryptocurrencyRepository(APIServise().createAPI(), this)
 
