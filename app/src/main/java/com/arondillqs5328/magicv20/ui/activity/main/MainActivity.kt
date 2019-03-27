@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupBottomNavView()
+
+        savedInstanceState ?: replaceFragment(R.id.cryptocurrency)
     }
 
     private fun setupBottomNavView() {
@@ -60,7 +62,6 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.main_frame_layout, fragment)
                 .commit()
         }
-
         return true
     }
 }

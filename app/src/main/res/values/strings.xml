@@ -3,4 +3,5 @@
     <string name="txt_favorites">Favorites</string>
     <string name="txt_cryptocurrency">Cryptocurrency</string>
     <string name="txt_advertising">Advertising</string>
+    <string name="txt_icon">Icon</string>
 </resources>
