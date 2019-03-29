@@ -47,20 +47,21 @@ class MainActivity : AppCompatActivity() {
             return Fragment()
         }
 
-        if (fragments.contains(id)) {
-            fragments[id]?.let {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.main_frame_layout, it)
-                    .commit()
-            }
-        } else {
-            val fragment: Fragment = getFragment(id)
-            fragments[id] = fragment
+        fun replace(fragment: Fragment) {
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame_layout, fragment)
                 .commit()
+        }
+
+        if (fragments.contains(id)) {
+            fragments[id]?.let {
+                replace(it)
+            }
+        } else {
+            val fragment: Fragment = getFragment(id)
+            fragments[id] = fragment
+            replace(fragment)
         }
         return true
     }

@@ -13,9 +13,6 @@ import com.squareup.picasso.Picasso
 
 class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
 
-    private val ITEM_VIEW_TYPE_BASIC: Int = 0
-    private val ITEM_VIEW_TYPE_FOOTER: Int = 1
-
     private var data: ArrayList<Data>? = ArrayList()
     private var isLoading = false
 
@@ -24,7 +21,7 @@ class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
         this.data = data
         Handler().postDelayed({
             notifyDataSetChanged()
-        }, 1000)
+        }, 500)
     }
 
     fun setupFooter(data: ArrayList<Data>?, isLoading: Boolean) {
