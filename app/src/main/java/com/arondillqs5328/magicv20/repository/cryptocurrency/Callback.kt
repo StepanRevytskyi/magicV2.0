@@ -7,4 +7,5 @@ interface Callback {
     fun onSuccess(data: List<Data>)
 
     fun onFailed()
+
 }

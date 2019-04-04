@@ -13,10 +13,10 @@ import com.squareup.picasso.Picasso
 
 class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
 
-    private var data: ArrayList<Data>? = ArrayList()
+    private var data: ArrayList<Data> = ArrayList()
     private var isLoading = false
 
-    fun setupData(data: ArrayList<Data>?) {
+    fun setupData(data: ArrayList<Data>) {
         isLoading = false
         this.data = data
         Handler().postDelayed({
@@ -24,7 +24,7 @@ class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
         }, 500)
     }
 
-    fun setupFooter(data: ArrayList<Data>?, isLoading: Boolean) {
+    fun setupFooter(data: ArrayList<Data>, isLoading: Boolean) {
         this.data = data
         this.isLoading = isLoading
         notifyDataSetChanged()
@@ -51,7 +51,7 @@ class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (data?.get(position)?.id ?: 0 != -1) {
+        return if (data[position].id != -1) {
             ITEM_VIEW_TYPE_BASIC
         } else {
             ITEM_VIEW_TYPE_FOOTER
@@ -59,13 +59,13 @@ class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
     }
 
     override fun getItemCount(): Int {
-        return data?.size ?: 0
+        return data.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is CryptocurrencyViewHolder -> {
-                holder.bind(data?.get(position))
+                holder.bind(data.get(position))
             }
             is ProgressBarViewHolder -> {
                 if (isLoading) {
@@ -80,12 +80,12 @@ class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
     class CryptocurrencyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var url: String = "https://s2.coinmarketcap.com/static/img/coins/128x128/"
 
-        private val icon: ImageView = itemView.findViewById(R.id.icon)
-        private val label: TextView = itemView.findViewById(R.id.label)
-        private val price: TextView = itemView.findViewById(R.id.price)
+        private val icon: ImageView = itemView.findViewById(R.id.icon_cr)
+        private val label: TextView = itemView.findViewById(R.id.label_cr)
+        private val price: TextView = itemView.findViewById(R.id.price_cr)
 
-        fun bind(data: Data?) {
-            val price: String = "$ ${data!!.quote.usd.price}"
+        fun bind(data: Data) {
+            val price: String = "$ ${data.quote?.usd?.price}"
 
             Picasso.get().load(url + data.id + ".png").into(icon)
             label.text = data.name

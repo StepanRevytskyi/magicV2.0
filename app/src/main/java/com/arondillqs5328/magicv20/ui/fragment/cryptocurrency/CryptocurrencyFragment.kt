@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arondillqs5328.magicv20.R
 import com.arondillqs5328.magicv20.adapter.CryptocurrencyRecyclerAdapter
-import com.arondillqs5328.magicv20.androidX.MvpAppCompatFragment
+import com.arondillqs5328.magicv20.androidx.MvpAppCompatFragment
 import com.arondillqs5328.magicv20.model.pojo.Data
 import com.arondillqs5328.magicv20.model.pojo.Quote
 import com.arondillqs5328.magicv20.model.pojo.USD
@@ -80,11 +80,11 @@ class CryptocurrencyFragment : MvpAppCompatFragment(), CryptoView {
     override fun showFooter(isLoading: Boolean) {
         val oldData: ArrayList<Data>? = data.value
         oldData?.add(Data(-1, "", Quote(USD(-1.0))))
-        (recycler.adapter as CryptocurrencyRecyclerAdapter).setupFooter(oldData, true)
+        oldData?.let { (recycler.adapter as CryptocurrencyRecyclerAdapter).setupFooter(it, true) }
     }
 
     override fun hideFooter() {
         val oldData: ArrayList<Data>? = data.value
-        (recycler.adapter as CryptocurrencyRecyclerAdapter).setupData(oldData)
+        oldData?.let { (recycler.adapter as CryptocurrencyRecyclerAdapter).setupData(it) }
     }
 }

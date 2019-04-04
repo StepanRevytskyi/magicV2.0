@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arondillqs5328.magicv20.R
-import com.arondillqs5328.magicv20.androidX.MvpAppCompatFragment
+import com.arondillqs5328.magicv20.androidx.MvpAppCompatFragment
 
 class AdvertisingFragment : MvpAppCompatFragment() {
 

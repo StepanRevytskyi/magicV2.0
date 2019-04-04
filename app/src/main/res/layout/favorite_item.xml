@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/icon_cr"
+        android:id="@+id/icon_fa"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
         android:layout_alignParentStart="true"
@@ -16,25 +16,14 @@
         android:contentDescription="@string/txt_icon" />
 
     <TextView
-        android:id="@+id/label_cr"
+        android:id="@+id/label_fa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/icon_cr"
+        android:layout_centerInParent="true"
         android:layout_marginStart="16dp"
-        android:layout_toEndOf="@id/icon_cr"
+        android:layout_toEndOf="@id/icon_fa"
         android:textColor="@color/label_color"
         android:textSize="@dimen/label_text_size"
         tools:text="Bitcoin" />
-
-    <TextView
-        android:id="@+id/price_cr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/label_cr"
-        android:layout_alignStart="@id/label_cr"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/price_color"
-        android:textSize="@dimen/default_text_size"
-        tools:text="1000$" />
 
 </RelativeLayout>

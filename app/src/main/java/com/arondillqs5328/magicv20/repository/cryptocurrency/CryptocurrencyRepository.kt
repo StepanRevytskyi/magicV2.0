@@ -1,6 +1,5 @@
 package com.arondillqs5328.magicv20.repository.cryptocurrency
 
-import com.arondillqs5328.magicv20.model.pojo.Data
 import com.arondillqs5328.magicv20.model.pojo.Response
 import com.arondillqs5328.magicv20.network.api.CryptocurrencyAPI
 import retrofit2.Call
@@ -13,7 +12,9 @@ class CryptocurrencyRepository(private val api: CryptocurrencyAPI,
         call.enqueue(object : retrofit2.Callback<Response> {
             override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
                 if (response.isSuccessful) {
-                    response.body()?.data?.let { callback.onSuccess(it) }
+                    if (response.body()?.status?.error_code ?: -1 == 0) {
+                        response.body()?.data?.let { callback.onSuccess(it) }
+                    }
                 }
             }
 
@@ -21,9 +22,5 @@ class CryptocurrencyRepository(private val api: CryptocurrencyAPI,
                 callback.onFailed()
             }
         })
-    }
-
-    override fun saveToDatabase(data: Data) {
-        TODO("not implemented")
     }
 }

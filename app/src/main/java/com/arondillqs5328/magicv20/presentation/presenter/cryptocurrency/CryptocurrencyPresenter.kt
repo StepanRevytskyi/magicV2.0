@@ -45,7 +45,7 @@ class CryptocurrencyPresenter : MvpPresenter<CryptoView>(), Callback {
     }
 
     fun onSaveToDatabase(data: Data) {
-        repository.saveToDatabase(data)
+        //TODO: it must do DatabaseHelper
     }
 
     override fun onSuccess(data: List<Data>) {
@@ -65,6 +65,6 @@ class CryptocurrencyPresenter : MvpPresenter<CryptoView>(), Callback {
     }
 
     override fun onFailed() {
-        TODO("not implemented")
+        //TODO: not implemented
     }
 }
