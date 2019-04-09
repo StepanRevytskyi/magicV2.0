@@ -11,23 +11,20 @@ import com.arondillqs5328.magicv20.R
 import com.arondillqs5328.magicv20.model.pojo.Data
 import com.squareup.picasso.Picasso
 
-class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
+class CryptocurrencyRecyclerAdapter(private val listener: OnItemClickListener) : BasicRecyclerAdapter() {
 
     private var data: ArrayList<Data> = ArrayList()
     private var isLoading = false
 
-    fun setupData(data: ArrayList<Data>) {
-        isLoading = false
+    /**
+     * @param isLoading if true -> show footer(progress bar)
+     */
+    fun setupData(data: ArrayList<Data>, isLoading: Boolean) {
+        this.isLoading = isLoading
         this.data = data
         Handler().postDelayed({
             notifyDataSetChanged()
         }, 500)
-    }
-
-    fun setupFooter(data: ArrayList<Data>, isLoading: Boolean) {
-        this.data = data
-        this.isLoading = isLoading
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -65,7 +62,7 @@ class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is CryptocurrencyViewHolder -> {
-                holder.bind(data.get(position))
+                holder.bind(data[position], listener)
             }
             is ProgressBarViewHolder -> {
                 if (isLoading) {
@@ -84,12 +81,14 @@ class CryptocurrencyRecyclerAdapter : BasicRecyclerAdapter() {
         private val label: TextView = itemView.findViewById(R.id.label_cr)
         private val price: TextView = itemView.findViewById(R.id.price_cr)
 
-        fun bind(data: Data) {
+        fun bind(data: Data, listener: OnItemClickListener) {
             val price: String = "$ ${data.quote?.usd?.price}"
 
             Picasso.get().load(url + data.id + ".png").into(icon)
             label.text = data.name
             this.price.text = price
+
+            itemView.setOnClickListener { listener.onItemClick(data.id) }
         }
     }
 }

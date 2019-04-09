@@ -12,5 +12,4 @@ interface CryptoView : BasicView {
 
     @StateStrategyType(value = AddToEndSingleByTagStateStrategy::class, tag = TAG_FOOTER)
     fun hideFooter()
-
 }

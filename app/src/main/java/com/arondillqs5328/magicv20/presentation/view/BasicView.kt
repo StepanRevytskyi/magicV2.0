@@ -14,5 +14,4 @@ interface BasicView : MvpView {
 
     @StateStrategyType(value = AddToEndSingleByTagStateStrategy::class, tag = TAG_PROGRESS_BAR)
     fun hideProgressBar()
-
 }

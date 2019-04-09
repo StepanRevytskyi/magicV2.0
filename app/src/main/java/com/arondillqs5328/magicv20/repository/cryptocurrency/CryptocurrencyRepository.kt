@@ -2,6 +2,7 @@ package com.arondillqs5328.magicv20.repository.cryptocurrency
 
 import com.arondillqs5328.magicv20.model.pojo.Response
 import com.arondillqs5328.magicv20.network.api.CryptocurrencyAPI
+import com.arondillqs5328.magicv20.repository.Callback
 import retrofit2.Call
 
 class CryptocurrencyRepository(private val api: CryptocurrencyAPI,

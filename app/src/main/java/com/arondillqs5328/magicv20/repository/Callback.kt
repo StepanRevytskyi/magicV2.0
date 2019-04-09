@@ -1,4 +1,4 @@
-package com.arondillqs5328.magicv20.repository.cryptocurrency
+package com.arondillqs5328.magicv20.repository
 
 import com.arondillqs5328.magicv20.model.pojo.Data
 

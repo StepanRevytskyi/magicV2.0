@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.arondillqs5328.magicv20.model.pojo.Data
-import com.arondillqs5328.magicv20.network.APIServise
+import com.arondillqs5328.magicv20.network.APIService
 import com.arondillqs5328.magicv20.presentation.view.cryptocurrency.CryptoView
-import com.arondillqs5328.magicv20.repository.cryptocurrency.Callback
+import com.arondillqs5328.magicv20.repository.Callback
 import com.arondillqs5328.magicv20.repository.cryptocurrency.CryptocurrencyRepository
 
 @InjectViewState
@@ -17,7 +17,7 @@ class CryptocurrencyPresenter : MvpPresenter<CryptoView>(), Callback {
     private var start: Int = 1
     private var limit: Int = 25
     private var liveData: MutableLiveData<ArrayList<Data>> = MutableLiveData()
-    private val repository: CryptocurrencyRepository = CryptocurrencyRepository(APIServise().createAPI(), this)
+    private val repository: CryptocurrencyRepository = CryptocurrencyRepository(APIService().createAPI(), this)
 
     init {
         val data: ArrayList<Data> = ArrayList()
@@ -42,10 +42,6 @@ class CryptocurrencyPresenter : MvpPresenter<CryptoView>(), Callback {
                 }
             }
         }
-    }
-
-    fun onSaveToDatabase(data: Data) {
-        //TODO: it must do DatabaseHelper
     }
 
     override fun onSuccess(data: List<Data>) {

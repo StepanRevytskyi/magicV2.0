@@ -4,4 +4,7 @@
     <string name="txt_cryptocurrency">Cryptocurrency</string>
     <string name="txt_advertising">Advertising</string>
     <string name="txt_icon">Icon</string>
+    <string name="txt_coming_soon">Coming soon</string>
+    <string name="txt_dashboard">Dashboard</string>
+    <string name="txt_back">Back</string>
 </resources>

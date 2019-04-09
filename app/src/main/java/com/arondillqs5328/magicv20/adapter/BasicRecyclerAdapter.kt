@@ -8,6 +8,10 @@ import com.arondillqs5328.magicv20.R
 
 open class BasicRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    interface OnItemClickListener {
+        fun onItemClick(id: Int)
+    }
+
     val ITEM_VIEW_TYPE_BASIC: Int = 0
     val ITEM_VIEW_TYPE_FOOTER: Int = 1
 

@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class APIServise {
+class APIService {
 
     private val API_URL: String = "https://pro-api.coinmarketcap.com"
     private val API_HEADER: String = "X-CMC_PRO_API_KEY"

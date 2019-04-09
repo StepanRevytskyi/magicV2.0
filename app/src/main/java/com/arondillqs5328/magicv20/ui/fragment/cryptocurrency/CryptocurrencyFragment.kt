@@ -1,5 +1,6 @@
 package com.arondillqs5328.magicv20.ui.fragment.cryptocurrency
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arondillqs5328.magicv20.MagicApplication
 import com.arondillqs5328.magicv20.R
+import com.arondillqs5328.magicv20.adapter.BasicRecyclerAdapter
 import com.arondillqs5328.magicv20.adapter.CryptocurrencyRecyclerAdapter
 import com.arondillqs5328.magicv20.androidx.MvpAppCompatFragment
 import com.arondillqs5328.magicv20.model.pojo.Data
@@ -18,8 +21,9 @@ import com.arondillqs5328.magicv20.model.pojo.Quote
 import com.arondillqs5328.magicv20.model.pojo.USD
 import com.arondillqs5328.magicv20.presentation.presenter.cryptocurrency.CryptocurrencyPresenter
 import com.arondillqs5328.magicv20.presentation.view.cryptocurrency.CryptoView
+import com.arondillqs5328.magicv20.ui.activity.detail.DetailActivity
 
-class CryptocurrencyFragment : MvpAppCompatFragment(), CryptoView {
+class CryptocurrencyFragment : MvpAppCompatFragment(), CryptoView, BasicRecyclerAdapter.OnItemClickListener {
 
     private lateinit var recycler: RecyclerView
     private lateinit var progressBar: ProgressBar
@@ -50,7 +54,7 @@ class CryptocurrencyFragment : MvpAppCompatFragment(), CryptoView {
     private fun setupRecyclerView() {
         recycler.setHasFixedSize(true)
         recycler.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        recycler.adapter = CryptocurrencyRecyclerAdapter()
+        recycler.adapter = CryptocurrencyRecyclerAdapter(this)
         recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 presenter.onLoadMore(
@@ -63,7 +67,7 @@ class CryptocurrencyFragment : MvpAppCompatFragment(), CryptoView {
 
     private fun setupLiveData() {
         data.observe(this, Observer<ArrayList<Data>> { data ->
-            (recycler.adapter as CryptocurrencyRecyclerAdapter).setupData(data)
+            (recycler.adapter as CryptocurrencyRecyclerAdapter).setupData(data, false)
         })
     }
 
@@ -80,11 +84,16 @@ class CryptocurrencyFragment : MvpAppCompatFragment(), CryptoView {
     override fun showFooter(isLoading: Boolean) {
         val oldData: ArrayList<Data>? = data.value
         oldData?.add(Data(-1, "", Quote(USD(-1.0))))
-        oldData?.let { (recycler.adapter as CryptocurrencyRecyclerAdapter).setupFooter(it, true) }
+        oldData?.let { (recycler.adapter as CryptocurrencyRecyclerAdapter).setupData(it, true) }
     }
 
     override fun hideFooter() {
         val oldData: ArrayList<Data>? = data.value
-        oldData?.let { (recycler.adapter as CryptocurrencyRecyclerAdapter).setupData(it) }
+        oldData?.let { (recycler.adapter as CryptocurrencyRecyclerAdapter).setupData(it, false) }
+    }
+
+    override fun onItemClick(id: Int) {
+        MagicApplication.id = id
+        startActivity(Intent(activity, DetailActivity::class.java))
     }
 }

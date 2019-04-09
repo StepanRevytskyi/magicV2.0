@@ -10,7 +10,8 @@ import com.arondillqs5328.magicv20.R
 import com.arondillqs5328.magicv20.model.pojo.Data
 import com.squareup.picasso.Picasso
 
-class FavoriteRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FavoriteRecyclerAdapter(private val listener: BasicRecyclerAdapter.OnItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var data: ArrayList<Data> = ArrayList()
 
@@ -33,7 +34,7 @@ class FavoriteRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is FavoriteViewHolder -> {
-                holder.bind(data[position])
+                holder.bind(data[position], listener)
             }
         }
     }
@@ -44,9 +45,11 @@ class FavoriteRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         private val icon: ImageView = itemView.findViewById(R.id.icon_fa)
         private val label: TextView = itemView.findViewById(R.id.label_fa)
 
-        fun bind(data: Data) {
+        fun bind(data: Data, listener: BasicRecyclerAdapter.OnItemClickListener) {
             Picasso.get().load(url + data.id + ".png").into(icon)
             label.text = data.name
+
+            itemView.setOnClickListener { listener.onItemClick(data.id) }
         }
     }
 }

@@ -12,5 +12,7 @@ class MagicApplication : Application() {
     companion object {
         lateinit var INSTANCE: MagicApplication
             private set
+
+        var id: Int = -1
     }
 }
